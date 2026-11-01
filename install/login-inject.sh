@@ -56,8 +56,11 @@ if [ -f "$ADMIN_LOGIN" ]; then
     add)
       put "$(dirname "$0")/login.js" "$(dirname "$ADMIN_LOGIN")/soniq2fa-login.js"
       if ! grep -qF "$ADMIN_LOGIN_TAG" "$ADMIN_LOGIN"; then
+        # carbonio-admin-login-ui up to 0.9.x loads index.js, 0.10.x the module /static/login/main.js
         if grep -q '<script defer="defer" src="index.js">' "$ADMIN_LOGIN"; then
           editf "$ADMIN_LOGIN" "s#<script defer=\"defer\" src=\"index.js\">#$ADMIN_LOGIN_TAG&#"
+        elif grep -q '<script type="module" crossorigin src="/static/login/main.js">' "$ADMIN_LOGIN"; then
+          editf "$ADMIN_LOGIN" "s#<script type=\"module\" crossorigin src=\"/static/login/main.js\">#$ADMIN_LOGIN_TAG&#"
         else
           echo "soniq2fa: unexpected $ADMIN_LOGIN, not changed" >&2
         fi

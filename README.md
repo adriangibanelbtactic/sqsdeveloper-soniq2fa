@@ -225,8 +225,8 @@ Also recommended:
 
 | `carbonio-mailbox-jar` | Jetty | Status |
 |---|---|---|
+| 4.28 and later | 12 (ee8) | tested on 4.36.6 (Carbonio CE 26.9) |
 | 4.24 – 4.27 | 9.4 | tested on 4.25.2 (Carbonio CE 26.3) |
-| 4.28 and later | 12 (ee8) | API checked against the source, not tested on a server |
 | 4.20 – 4.23 | 9.4, Java 17 | not tested |
 
 At start-up the extension logs an error if it does not recognise the Jetty version. SMTP AUTH of enrolled
@@ -643,8 +643,8 @@ The login pages send the same `AuthRequest` JSON; a change in how the server ans
 ## Limitations
 
 - The login dialog relies on the CE login forms calling `/service/soap/AuthRequest` (webmail) and
-  `/service/admin/soap/AuthRequest` (admin console) through `fetch` (carbonio-login-ui 0.9.x–0.11.x and the matching
-  carbonio-admin-login-ui).
+  `/service/admin/soap/AuthRequest` (admin console) through `fetch` (carbonio-login-ui 0.9.x–0.11.x,
+  carbonio-admin-login-ui 0.9.x–0.10.x).
 - During the grace period of a required account (see *Who can turn it on, who must*) the password alone still works,
   and whoever knows it can set 2FA up with their own phone first. Keep the period short where it matters and ask
   users to set it up soon.
